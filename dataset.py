@@ -5,7 +5,7 @@ import pykitti
 import itertools
 
 class Dataset(object):
-    # init dataset
+    # constructor
     def __init__(self,basedir,date,drive,frame_range):
         # Change this to the directory where you store KITTI data
         self.basedir = basedir
