@@ -2,7 +2,7 @@
 class DetectionManager(object):
     def __init__(self):
         self.number_of_cluster = 0
-        self.object_list = []
+        self.list_of_objects = []
         self.labeling = []
 
     # todo: labeling for each cluster method?
@@ -12,4 +12,4 @@ class DetectionManager(object):
     def get_labeling(self):
         return self.labeling
     def get_objects(self):
-        return self.object_list
+        return self.list_of_objects

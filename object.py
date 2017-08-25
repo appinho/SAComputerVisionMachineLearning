@@ -3,6 +3,7 @@ import numpy as np
 # todo: really pass gridmap_manager??
 class Object(object):
     # construct object
+    # TODO: nicer way to pass arguments
     def __init__(self,label_out,gridmap_manager,label_id):
         pos_x,pos_y,length,width = gridmap_manager.cell_to_obj(label_out)
         self.grid_x = label_out[0]
