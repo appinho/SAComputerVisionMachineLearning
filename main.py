@@ -20,8 +20,11 @@ for frame in range(0,2):
     print "-----Frame " + str(frame) + "-----"
 
     gridmap_manager.fill_point_cloud_in_grids(data.get_point_cloud(frame))
-    detector.get_objects(gridmap_manager)
+    detector.cluster(gridmap_manager)
     print "Number of objects = " + str(detector.number_of_cluster)
 
     # VISUALIZATION
-    visualization.show_steps(gridmap_manager.get_gridmap(),detector.labeling)
+    visualization.show_steps(gridmap_manager.get_gridmap(),
+                             detector.get_labeling())
+    visualization.show_boxes(detector.get_objects(),
+                             detector.get_labeling())
