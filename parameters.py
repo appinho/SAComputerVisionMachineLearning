@@ -13,3 +13,6 @@ pointcloud_iterator = 5
 # detection parameters
 
 # tracking parameters
+
+# data association parameters
+gating = 10

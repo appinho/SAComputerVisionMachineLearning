@@ -12,5 +12,5 @@ class Object(object):
         self.grid_w = label_out[3]
         self.length = length
         self.width = width
-        self.x = np.array([pos_x,pos_y,0,0])
+        self.x = np.array([pos_x,pos_y,0,0]).reshape(4,1)
         self.label_id = label_id

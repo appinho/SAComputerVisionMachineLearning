@@ -22,3 +22,7 @@ class Dataset(object):
     def get_point_cloud(self,current_frame):
         point_cloud = next(itertools.islice(self.raw_data.velo, current_frame, None))
         return point_cloud
+
+    def get_delta_t(self,current_frame):
+        timeframe = self.raw_data.timestamps[current_frame+1]-self.raw_data.timestamps[current_frame]
+        return timeframe.total_seconds()

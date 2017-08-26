@@ -9,6 +9,7 @@ class ConnectedComponent(DetectionManager):
         self.connectivity = connectivity
 
     def cluster(self,gridmap_manager):
+        self.list_of_objects = []
         # binary has either 0 or 255 as output then
         # todo: parameter threshold value
         ret, binary = cv2.threshold(gridmap_manager.get_gridmap(), 0, 255, cv2.THRESH_BINARY)
