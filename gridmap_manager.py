@@ -22,14 +22,6 @@ class GridMapManager(object):
         grid_width = width / parameters.cell_size
         return grid_length,grid_width
 
-    # returns position,length and width of object
-    def cell_to_obj(self,label_output):
-        pos_x = (parameters.x_num_cells/2-label_output[0])*parameters.cell_size
-        pos_y = (parameters.x_num_cells/2-label_output[1])*parameters.cell_size
-        length = label_output[2]*parameters.cell_size
-        width = label_output[3]*parameters.cell_size
-        return (pos_x,pos_y,length,width)
-
     # reset dense and sparse gridmaps
     def reset_grids(self):
         self.dense_gridmap = np.zeros((parameters.x_num_cells,parameters.y_num_cells), dtype=np.uint8)

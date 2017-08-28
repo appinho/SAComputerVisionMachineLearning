@@ -16,9 +16,15 @@ class ConnectedComponent(DetectionManager):
         output = cv2.connectedComponentsWithStats(binary, self.connectivity, cv2.CV_32S)
         self.number_of_cluster = output[0]-1
         self.labeling = output[1]
-        self.init_objects(output[2][1:],gridmap_manager)
+        self.init_objects(output[2][1:])
+
     # todo: init objects in here or in manager
-    def init_objects(self,labels,gridmap_manager):
-        for label_id, row in enumerate(labels):
-            obj = Object(row, gridmap_manager, label_id)
+    def init_objects(self,label_output):
+        for label_id, cluster in enumerate(label_output):
+            grid_geometry = (cluster[0],
+                             cluster[1],
+                             cluster[2],
+                             cluster[3])
+            geometry = self.cell_to_obj(grid_geometry)
+            obj = Object(grid_geometry,geometry, label_id)
             self.list_of_objects.append(obj)

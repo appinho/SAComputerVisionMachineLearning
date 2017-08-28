@@ -16,7 +16,7 @@ tracker = TrackingManager()
 
 # LOOP THROUGH TIME FRAMES
 #todo: later replace range by one variable that also goes within dataset
-for frame in range(0,4):
+for frame in range(0,2):
     #todo: remove debug prints
     print "-----Frame " + str(frame) + "-----"
 
@@ -39,3 +39,4 @@ for frame in range(0,4):
     #visualization.show_boxes(detector.get_objects(),
     #                         detector.get_labeling())
     #visualization.show_prediction_update(gridmap_manager,tracker.get_tracks())
+    visualization.show_prediction_and_update(tracker.get_tracks())

@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
+from matplotlib.patches import Ellipse
 import numpy as np
-import parameters
 
 def show_steps(gridmap,labeling):
     plt.subplot(1, 2, 1)
@@ -51,4 +51,35 @@ def show_prediction_update(grid_manager,tracks):
                                  facecolor='none')
         ax.add_patch(upd)
     plt.title("Tracking")
+    plt.show()
+
+def eigsorted(cov):
+    vals, vecs = np.linalg.eigh(cov)
+    order = vals.argsort()[::-1]
+    return vals[order], vecs[:,order]
+
+def show_prediction_and_update(tracks):
+    ax = plt.subplot(111)
+    for track in tracks:
+        x = -track.x[1]
+        y = track.x[0]
+        if len(track.z)>1:
+            obs_x = -track.z[0]
+            obs_y = track.z[1]
+            plt.plot(obs_x, obs_y, 'x')
+        xp = -track.xp[0]
+        yp = track.xp[1]
+        cov = track.P[np.ix_([0,2],[0,2])]
+        vals, vecs = eigsorted(cov)
+        theta = np.degrees(np.arctan2(*vecs[:,0][::-1]))
+        w, h = 2 * 2 * np.sqrt(vals)
+        ell = Ellipse(xy=(np.mean(x), np.mean(y)),
+                      width=w, height=h,
+                      angle=theta, color='black')
+        ell.set_facecolor('none')
+        ax.add_artist(ell)
+        plt.plot(x, y,'.')
+        plt.plot(xp,yp,'o')
+    #plt.axis([-80, 80, -80, 80])
+    ax.axis('equal')
     plt.show()

@@ -20,6 +20,7 @@ class Dataset(object):
         self.raw_data = pykitti.raw(basedir, date, drive, frames=frame_range)
         # Ego motion
         # TODO: Change to dictonary to have one unique data structure with x,y,vx,vy,ax,ay
+        # TODO: ADD ROTATION
         self.ego_motion = np.matrix(np.zeros((4,1)))
         # time frame
         self.current_time_frame = 0
