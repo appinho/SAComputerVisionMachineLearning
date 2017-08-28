@@ -17,6 +17,11 @@ class GridMapManager(object):
         y = int((parameters.y_range-point[1])/parameters.cell_size)
         return (x,y)
 
+    def size_to_gridsize(self,length,width):
+        grid_length = length / parameters.cell_size
+        grid_width = width / parameters.cell_size
+        return grid_length,grid_width
+
     # returns position,length and width of object
     def cell_to_obj(self,label_output):
         pos_x = (parameters.x_num_cells/2-label_output[0])*parameters.cell_size

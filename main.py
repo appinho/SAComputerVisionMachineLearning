@@ -28,13 +28,14 @@ for frame in range(0,4):
     print "Number of objects = " + str(detector.number_of_cluster)
 
     # TRACKING
-    tracker.process(detector.get_objects(),data.get_delta_t(frame))
+    tracker.process(detector.get_objects(),
+                    data.get_ego_motion_and_delta_t(frame))
     print "Number of tracks  = " + str(len(tracker.get_tracks()))
 
     # VISUALIZATION
-    """
-    visualization.show_steps(gridmap_manager.get_gridmap(),
-                             detector.get_labeling())
-    visualization.show_boxes(detector.get_objects(),
-                             detector.get_labeling())
-    """
+
+    #visualization.show_steps(gridmap_manager.get_gridmap(),
+    #                         detector.get_labeling())
+    #visualization.show_boxes(detector.get_objects(),
+    #                         detector.get_labeling())
+    #visualization.show_prediction_update(gridmap_manager,tracker.get_tracks())

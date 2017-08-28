@@ -3,38 +3,47 @@ from numpy.linalg import inv
 
 class KalmanFilter(object):
 
-    def __init__(self):
-        self.Q = np.eye(4,4)
-        self.R = np.eye(2,2)
-        self.H = np.matrix([[1,0,0,0],[0,1,0,0]])
-        self.Ht = np.eye(2,4)
+    def __init__(self,number_of_states,number_of_observations):
+        self.number_of_states = number_of_states
+        self.number_of_observations = number_of_observations
+        self.Q = np.matrix(np.eye(self.number_of_states))
+        self.R = np.matrix(np.eye(self.number_of_observations))
+        self.H = np.matrix(np.eye(self.number_of_observations,self.number_of_states))
+        self.F = np.matrix(np.eye(self.number_of_states))
+        self.I = np.matrix(np.eye(self.number_of_states))
 
-    def predict(self,tracks,delta_t):
+    def predict(self,tracks,ego_motion,delta_t):
+        self.update_F(delta_t)
         for track in tracks:
-            self.constant_velocity_model(track,delta_t)
+            self.constant_velocity_model(track,ego_motion)
 
-    def constant_velocity_model(self,track,delta_t):
-        track.xp[0] = track.x[0] + delta_t * track.x[2]
-        track.xp[1] = track.x[1] + delta_t * track.x[3]
-        track.xp[2] = track.x[2]
-        track.xp[3] = track.x[3]
-        track.Pp = track.P + self.Q
+    def update_F(self,delta_t):
+        self.F[0, 2] = delta_t
+        self.F[1, 3] = delta_t
 
-    def update(self,track,measurement):
-        z = measurement.x[0:2]
-        xp = track.xp
-        Pp = track.Pp
-        Hxp = np.dot(self.H,xp)
-        y = np.subtract(z,Hxp)
-        S=self.R + np.dot(np.dot(self.H,Pp),self.H.T)
-        K = np.dot(Pp,np.dot(self.H.T,inv(S)))
-        xnew = xp + np.dot(K,y)
-        Pnew = np.dot(np.eye(4,4)-np.dot(K,self.H),Pp)
-        track.x = xnew
-        track.P = Pnew
-        track.age += 1
+    def constant_velocity_model(self,track,ego_motion):
+        track.xp = self.F*track.x - ego_motion
+        track.Pp = self.F*track.P*self.F.T + self.Q
+    # TODO: implement constant acceleration and CTRCV model
 
-    def update_unassigned_track(self,track):
-        track.x = track.xp
-        track.P = track.Pp
+    def update(self,track):
+        # if measurement has been found
+        if len(track.z)>1:
+            # distance between measured and current position-belief
+            y = track.z - self.H * track.xp
+            # residual convariance
+            S = self.H * track.Pp * self.H.T + self.R
+            # Kalman gain
+            K = track.Pp * self.H.T * S.I
+            # Update track state
+            track.x = track.xp + K * y
+            # Update track covariance
+            track.P = (self.I - K * self.H) * track.Pp
+            # Increment age of track
+            track.age += 1
+        # if no measurement has been found
+        else:
+            track.x = track.xp
+            track.P = track.Pp
+            track.not_updated += 1
 
