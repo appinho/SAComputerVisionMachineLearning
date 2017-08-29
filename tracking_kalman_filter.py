@@ -39,11 +39,12 @@ class KalmanFilter(object):
             track.x = track.xp + K * y
             # Update track covariance
             track.P = (self.I - K * self.H) * track.Pp
-            # Increment age of track
-            track.age += 1
         # if no measurement has been found
         else:
             track.x = track.xp
             track.P = track.Pp
             track.not_updated += 1
+        # Increment age of track
+        track.age += 1
+
 

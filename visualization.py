@@ -1,7 +1,8 @@
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
-from matplotlib.patches import Ellipse
+from matplotlib.patches import Ellipse,Circle
 import numpy as np
+import parameters
 
 def show_steps(gridmap,labeling):
     plt.subplot(1, 2, 1)
@@ -59,27 +60,59 @@ def eigsorted(cov):
     return vals[order], vecs[:,order]
 
 def show_prediction_and_update(tracks):
+    colors = ["red", "blue", "green",
+              "purple","cyan","magenta"]
     ax = plt.subplot(111)
-    for track in tracks:
+    for index,track in enumerate(tracks):
+        c = colors[index%len(colors)]
+        # observation
+        if len(track.z)>1:
+            obs_x = -track.z[1]
+            obs_y = track.z[0]
+            plt.plot(obs_x, obs_y, 'x',color=c,
+                     linewidth=2)
+        # no observation
+        elif track.age == 0:
+            c = 'gray'
+        else:
+            c = 'black'
+
+        #store values
         x = -track.x[1]
         y = track.x[0]
-        if len(track.z)>1:
-            obs_x = -track.z[0]
-            obs_y = track.z[1]
-            plt.plot(obs_x, obs_y, 'x')
-        xp = -track.xp[0]
-        yp = track.xp[1]
+        xp = -track.xp[1]
+        yp = track.xp[0]
+        plt.plot(x, y,'.',color=c)
+        plt.plot(xp,yp,'o',color=c)
+
+        #calculate ellipses
         cov = track.P[np.ix_([0,2],[0,2])]
+        covp = track.Pp[np.ix_([0, 2], [0, 2])]
         vals, vecs = eigsorted(cov)
+        valsp, vecsp = eigsorted(covp)
         theta = np.degrees(np.arctan2(*vecs[:,0][::-1]))
+        thetap = np.degrees(np.arctan2(*vecsp[:,0][::-1]))
         w, h = 2 * 2 * np.sqrt(vals)
+        wp, hp = 2 * 2 * np.sqrt(valsp)
+
+        #draw ellipses
         ell = Ellipse(xy=(np.mean(x), np.mean(y)),
                       width=w, height=h,
-                      angle=theta, color='black')
+                      angle=theta, color=c,
+                      linewidth=2)
         ell.set_facecolor('none')
         ax.add_artist(ell)
-        plt.plot(x, y,'.')
-        plt.plot(xp,yp,'o')
-    #plt.axis([-80, 80, -80, 80])
+        ellp = Ellipse(xy=(np.mean(xp), np.mean(yp)),
+                      width=wp, height=hp,
+                      angle=thetap, color=c,
+                      linestyle='dashed')
+        ellp.set_facecolor('none')
+        ax.add_artist(ellp)
+        #draw gating
+        cir = Circle((np.mean(xp), np.mean(yp)),
+                     parameters.gating, color=c,
+                     linestyle='dashdot')
+        cir.set_facecolor('none')
+        ax.add_artist(cir)
     ax.axis('equal')
     plt.show()

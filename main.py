@@ -16,7 +16,7 @@ tracker = TrackingManager()
 
 # LOOP THROUGH TIME FRAMES
 #todo: later replace range by one variable that also goes within dataset
-for frame in range(0,2):
+for frame in range(0,4):
     #todo: remove debug prints
     print "-----Frame " + str(frame) + "-----"
 
