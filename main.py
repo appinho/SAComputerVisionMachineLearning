@@ -39,4 +39,6 @@ for frame in range(0,4):
     #visualization.show_boxes(detector.get_objects(),
     #                         detector.get_labeling())
     #visualization.show_prediction_update(gridmap_manager,tracker.get_tracks())
-    visualization.show_prediction_and_update(tracker.get_tracks())
+    visualization.show_prediction_and_update(detector.get_objects(),
+                                             detector.get_labeling(),
+                                             tracker.get_tracks())

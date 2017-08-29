@@ -59,10 +59,21 @@ def eigsorted(cov):
     order = vals.argsort()[::-1]
     return vals[order], vecs[:,order]
 
-def show_prediction_and_update(tracks):
+def show_prediction_and_update(objects,labeling,tracks):
+    ax1 = plt.subplot(1,2,1)
+    ax1.imshow(labeling,cmap='gray')
+    for obj in objects:
+        rect = patches.Rectangle((obj.grid_x - 0.5,
+                                  obj.grid_y - 0.5),
+                                 obj.grid_l, obj.grid_w,
+                                 linewidth=1,
+                                 edgecolor='r',
+                                 facecolor='none')
+        ax1.add_patch(rect)
+    plt.title("Object boxes")
     colors = ["red", "blue", "green",
               "purple","cyan","magenta"]
-    ax = plt.subplot(111)
+    ax = plt.subplot(1,2,2)
     for index,track in enumerate(tracks):
         c = colors[index%len(colors)]
         # observation
@@ -82,6 +93,8 @@ def show_prediction_and_update(tracks):
         y = track.x[0]
         xp = -track.xp[1]
         yp = track.xp[0]
+        vx = -track.x[3]
+        vy = track.x[2]
         plt.plot(x, y,'.',color=c)
         plt.plot(xp,yp,'o',color=c)
 
@@ -114,5 +127,14 @@ def show_prediction_and_update(tracks):
                      linestyle='dashdot')
         cir.set_facecolor('none')
         ax.add_artist(cir)
+        #draw velocity
+        if vx>0 and vy>0:
+            dx = np.mean(vx) * 10
+            dy = np.mean(vy) * 10
+            ax.arrow(np.mean(x), np.mean(y), dx, dy, head_width=5, head_length=2, fc=c, ec=c)
     ax.axis('equal')
+    plt.xlim(-80, 80)
+    plt.ylim(-80,80)
+    plt.title("Prediction and update")
     plt.show()
+
