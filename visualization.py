@@ -77,9 +77,9 @@ def show_prediction_and_update(objects,labeling,tracks):
     for index,track in enumerate(tracks):
         c = colors[index%len(colors)]
         # observation
-        if len(track.z)>1:
-            obs_x = -track.z[1]
-            obs_y = track.z[0]
+        if len(track.z[-1])>1:
+            obs_x = -track.z[-1][1]
+            obs_y = track.z[-1][0]
             plt.plot(obs_x, obs_y, 'x',color=c,
                      linewidth=2)
         # no observation
@@ -89,18 +89,18 @@ def show_prediction_and_update(objects,labeling,tracks):
             c = 'black'
 
         #store values
-        x = -track.x[1]
-        y = track.x[0]
-        xp = -track.xp[1]
-        yp = track.xp[0]
-        vx = -track.x[3]
-        vy = track.x[2]
+        x = -track.x[-1][1]
+        y = track.x[-1][0]
+        xp = -track.xp[-1][1]
+        yp = track.xp[-1][0]
+        vx = -track.x[-1][3]
+        vy = track.x[-1][2]
         plt.plot(x, y,'.',color=c)
         plt.plot(xp,yp,'o',color=c)
 
         #calculate ellipses
-        cov = track.P[np.ix_([0,2],[0,2])]
-        covp = track.Pp[np.ix_([0, 2], [0, 2])]
+        cov = track.P[-1][np.ix_([0, 2],[0, 2])]
+        covp = track.Pp[-1][np.ix_([0, 2], [0, 2])]
         vals, vecs = eigsorted(cov)
         valsp, vecsp = eigsorted(covp)
         theta = np.degrees(np.arctan2(*vecs[:,0][::-1]))

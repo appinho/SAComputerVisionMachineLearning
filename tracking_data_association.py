@@ -17,7 +17,7 @@ class DataAssociation(object):
             minimum_index = -1
             for object_index, object in enumerate(objects):
                 if checked_object[object_index] == 0:
-                    distance = self.get_euclidean_distance(track.xp.item(0), track.xp.item(1),
+                    distance = self.get_euclidean_distance(track.xp[-1].item(0), track.xp[-1].item(1),
                                                            object.x.item(0), object.x.item(1))
                     if distance < parameters.gating:
                         if distance < minimum_distance:
@@ -25,9 +25,9 @@ class DataAssociation(object):
                             minimum_index = object_index
             if minimum_index != -1:
                 checked_object[minimum_index] = 1
-                track.z = objects[minimum_index].x[0:2]
+                track.z.append(objects[minimum_index].x[0:2])
             else:
-                track.z = []
+                track.z.append([])
         for ind in range(0,len(objects)):
             if checked_object[ind] == 0:
                 self.leftover_objects.append(ind)
