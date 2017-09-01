@@ -7,7 +7,7 @@ class TrackingManager(object):
         self.number_of_tracks = 0
         self.list_of_tracks = []
         self.list_of_objects = []
-        self.tracking_filter = KalmanFilter(4,2)
+        self.tracking_filter = KalmanFilter(4,2,0.2,1)
         self.data_association = DataAssociation()
 
 

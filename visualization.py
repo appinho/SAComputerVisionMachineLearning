@@ -99,8 +99,8 @@ def show_prediction_and_update(objects,labeling,tracks):
         plt.plot(xp,yp,'o',color=c)
 
         #calculate ellipses
-        cov = track.P[-1][np.ix_([0, 2],[0, 2])]
-        covp = track.Pp[-1][np.ix_([0, 2], [0, 2])]
+        cov = track.P[-1][:2,:2]
+        covp = track.Pp[-1][:2,:2]
         vals, vecs = eigsorted(cov)
         valsp, vecsp = eigsorted(covp)
         theta = np.degrees(np.arctan2(*vecs[:,0][::-1]))

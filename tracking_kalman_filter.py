@@ -3,11 +3,19 @@ from numpy.linalg import inv
 
 class KalmanFilter(object):
 
-    def __init__(self,number_of_states,number_of_observations):
+    def __init__(self,number_of_states,number_of_observations,var_z,var_a,dT=0.1):
         self.number_of_states = number_of_states
         self.number_of_observations = number_of_observations
-        self.Q = np.matrix(0.1*np.eye(self.number_of_states))
-        self.R = np.matrix(0.1*np.eye(self.number_of_observations))
+        #process noise covariance:
+        self.Q = var_a * np.matrix([
+            [(dT**4)/4,     (dT**4)/4,     (dT**3)/2,     (dT**3)/2],
+            [(dT**4)/4,     (dT**4)/4,     (dT**3)/2,     (dT**3)/2],
+            [(dT**3)/2,     (dT**3)/2,      dT**2,          dT**2],
+            [(dT**3)/2,     (dT**3)/2,      dT**2,          dT**2]
+        ])
+        print self.Q
+        self.R = np.matrix(var_z*np.eye(self.number_of_observations))
+        print self.R
         self.H = np.matrix(np.eye(self.number_of_observations,self.number_of_states))
         self.F = np.matrix(np.eye(self.number_of_states))
         self.I = np.matrix(np.eye(self.number_of_states))

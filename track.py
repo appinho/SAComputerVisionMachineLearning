@@ -6,12 +6,12 @@ class Track(object):
         self.number_of_states = 4 # x,y,vx,vy
         self.x = [object.x]
         self.xp = self.x
-        self.P = [np.matrix('''
-                  0.4   0.  0.  0.;
-                  0.    0.4 0.  0.;
-                  0.    0.  1.  0.;
-                  0.    0.  0.  1.
-                  ''')]
+        self.P = [np.matrix([
+            [0.3    ,    0  ,    0  ,       0],
+            [0      ,0.3    ,    0  ,       0],
+            [0      ,0      ,2      ,       0],
+            [0      ,0      ,0      ,       2]
+        ])]
         self.Pp = self.P
         self.z = [np.matrix([])]
         self.width = [object.width]
