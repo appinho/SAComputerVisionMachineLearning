@@ -14,7 +14,7 @@
 [image10]: ./test_images/stop.jpg "Stop Traffic Sign"
 [image11]: ./test_images/yield.jpg "Yield Traffic Sign"
 
-## 1 Data Set Summary & Exploration
+### Data Set Summary & Exploration
 
 The German Traffic Sign Dataset can be found with the following link: http://benchmark.ini.rub.de
 
@@ -31,7 +31,7 @@ Moreover, it is useful to plot the histogram of all occuring traffic sign per da
 
 All 3 histograms show that the number of examples per labels varies a lot. Usually, a uniformly distributed trainind data set leads to better classification results later. Therefore, a data augmentation step can be performed to find more examples of rare labels. Common methods for this data augmetation step are to rotate, translate, flip or add noise to the already existing examples. However, the invariance of each label class must be considered by performing one of the following transformations because a mirrored "30km/h speed limit" sign would lead to confusions within the dataset.
 
-## 2 Design and Test a Model Architecture
+### Design and Test a Model Architecture
 
 As a first step, all images are converted into grayscale images to reduce the number of channels from 3 to 1. The paper of the later used network architecture recommends the usage of grayscale images instead of RGB images which can be read more in detail here: (http://yann.lecun.com/exdb/publis/pdf/sermanet-ijcnn-11.pdf). As next step, the images are normalized to have 0 mean and equal variance to ensure that the input data is within the same range. Moreover, the gradient descent method together with the initialization of the weights and the biases of the neural net perform better with normalized data.
 Here is an example of a traffic sign image before and after grayscaling.
@@ -57,7 +57,7 @@ The training of the model is performed by 50 epochs to ensure a long enough trai
 
 This set up ended up in an accuracy of 94,6% for the validation set.
 
-## 3 Test a Model on New Images
+### Test a Model on New Images
 
 Here are 7 German traffic signs that can be found on the web:  
 ![alt text][image5] ![alt text][image6] ![alt text][image7] 
