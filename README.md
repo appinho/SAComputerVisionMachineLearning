@@ -1,4 +1,4 @@
-﻿# Computer Vision and Deep Learning Projects for Autonomous Driving
+﻿# SDC - Computer Vision and Deep Learning Projects
 [![Udacity - Self-Driving Car NanoDegree](https://s3.amazonaws.com/udacity-sdc/github/shield-carnd.svg)](http://www.udacity.com/drive)
 
 Perception related projects of Udacity's Self-driving Car Nanodegree Program. 
