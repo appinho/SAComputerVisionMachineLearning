@@ -22,6 +22,11 @@ Computer Vision and Deep Learning related projects of Udacity's Self-driving Car
 
 ## Traffic Sign Classification
 
+
+<p align="center">
+  <img src="./TrafficSignClassification/traffic_sign_classification.png">
+</p>
+
 ## Behavioral Cloning
 
 <p align="center">
@@ -29,3 +34,5 @@ Computer Vision and Deep Learning related projects of Udacity's Self-driving Car
 </p>
 
 ## Semantic Segmentation
+
+Coming soon..  
