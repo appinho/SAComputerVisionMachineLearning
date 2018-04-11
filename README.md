@@ -1,15 +1,9 @@
-# kitti_mot_python
-Python Code for tracking multiple objects out of the KITTI Vision Benchmark
+﻿# Computer Vision and Deep Learning Projects for Autonomous Driving
+[![Udacity - Self-Driving Car NanoDegree](https://s3.amazonaws.com/udacity-sdc/github/shield-carnd.svg)](http://www.udacity.com/drive)
 
-http://www.cvlibs.net/datasets/kitti/raw_data.php
-
-Structure:
-- main.py (executable)
-- dataset.py (interface to the kitti dataset) 
-- tracking manager.py (base class for tracking)
-- detection_manager.py (base class for detection)
-  - detection_connected_component.py (executes opencv connected component analysis)
-  - detection_dbscan.py (executes dbscan on grid cells)
-  - object.py (stores structures of one object
-- gridmap_manager.py (base class for gridmap)
-- visualizer.py (plot all kind of intermediate step with matplotlib)
+Perception related projects of Udacity's Self-driving Car Nanodegree Program. 
+* [Lane Detection](./LaneDetection/)
+* [Camera-based Vehicle Tracking](./CameraBasedVehicleTracking/)
+* [Traffic Sign Classification](./TrafficSignClassification/)
+* [Behavioral Cloning](./BehavioralCloning/)
+* [Semantic Segmentation](./SemanticSegmenation/)
