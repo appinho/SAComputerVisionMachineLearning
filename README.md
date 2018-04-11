@@ -10,10 +10,22 @@ Computer Vision and Deep Learning related projects of Udacity's Self-driving Car
 
 ## Lane Detection
 
+<p align="center">
+  <img src="./LaneDetection/lane_detection.gif">
+</p>
+
 ## Camera-based Vehicle Tracking
+
+<p align="center">
+  <img src="./CameraBasedVehicleTracking/vehicle_tracking.gif">
+</p>
 
 ## Traffic Sign Classification
 
 ## Behavioral Cloning
+
+<p align="center">
+  <img src="./BehavioralCloning/behavioral_cloning.gif">
+</p>
 
 ## Semantic Segmentation
