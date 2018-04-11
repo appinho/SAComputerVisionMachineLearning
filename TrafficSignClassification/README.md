@@ -1,4 +1,4 @@
-**Build a Traffic Sign Recognition Project**
+# Project: Traffic Sign Classification
 
 [//]: # (Image References)
 
