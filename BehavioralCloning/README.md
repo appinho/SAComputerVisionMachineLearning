@@ -9,7 +9,7 @@
 [image5]: ./report_images/right_image.jpg "Right training data image"
 [image6]: ./report_images/hist.png "Histogram of steering angles"
 
-### 1 Final Model Architecture
+### Final Model Architecture
 
 The chosen neural net architecture follows the model of the paper "End to End Learning for Self-Driving Cars" from NVIDIA (http://images.nvidia.com/content/tegra/automotive/images/2016/solutions/pdf/end-to-end-dl-using-px.pdf).  
 The subsequent layers with their attributes are listed in the following table:
@@ -44,21 +44,21 @@ Then, 5 Convolution Layers are performed in which each layer includes an RELU ac
 Moreover, the first 3 Convolutions are followed by 2x2 stride MaxPool Layers to narrow down the feature space.
 Towards the end, the network contains 4 fully connected layers to break down the information flow to one single output neuron which models the resulting steering angle.
 
-### 2 Attempts to reduce overfitting in the model
+### Attempts to reduce overfitting in the model
 
 The model performs well without any further regularization methods.
 Nevertheless, dropout layers could be integrated after each pooling layer to generalize the model even better.
 
-### 3 Model parameter tuning
+### Model parameter tuning
 
 The model used an adam optimizer, so the learning rate was not tuned manually.
 Moreover, as loss function the Mean-Squared-Error (MSE) was chosen which is a common loss function for regression models since the steering angle output is a floating number.
 
-### 4 Appropriate training data
+### Appropriate training data
 
 Training data was chosen to keep the vehicle driving on the road and different kind of scenarios were recorded to ensure that the model is not overfitting. Therefore, 2 counter-clockwise loops and 1 clockwise loop of the track were recorded to generalize the model better in both directions. Additionally, several safety maneuvers, which navigate back from the left or right edge of the track towards the center of it, were recorded in both driving directions. Specifically, on the bridge and in tight curves more recovering data was recorded to generalize better on different textures (tiles on bridge) and rare driving cases (like tight curves). For details about how I came up creating this training set, see the next section. 
 
-### 5 Solution Design Approach
+### Solution Design Approach
 
 The first step was to use a single-layer fully connected network to simply setup the whole pipeline.
 Also, only one recorded driven loop was used to evaluate the first try.
