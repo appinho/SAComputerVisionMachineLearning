@@ -1,4 +1,4 @@
-# Project: Behavioral Cloning
+# Term 1 Project 3: Behavioral Cloning
 
 [//]: # (Image References)
 

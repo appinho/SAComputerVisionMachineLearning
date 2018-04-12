@@ -1,4 +1,4 @@
-# Project: Traffic Sign Classification
+# Term 1 Project 2: Traffic Sign Classification
 
 [//]: # (Image References)
 

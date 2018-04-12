@@ -1,4 +1,4 @@
-# Project: Vehicle Detection And Tracking
+# Term 1 Project 5: Vehicle Detection And Tracking
 
 [//]: # (Image References)
 
