@@ -1,6 +1,6 @@
 # Term 3 Additional Project: Object Detection Lab
 
-![](assets/clip.gif)
+![](ssd.gif)
 
 ### Mobile Nets
 
