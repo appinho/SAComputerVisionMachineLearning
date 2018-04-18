@@ -6,6 +6,7 @@ Computer Vision and Deep Learning related projects of Udacity's Self-driving Car
 * [Camera-based Vehicle Tracking](./CameraBasedVehicleTracking/)
 * [Traffic Sign Classification](./TrafficSignClassification/)
 * [Behavioral Cloning](./BehavioralCloning/)
+* [Object Detection with SSD](./ObjectDetection/)
 * [Semantic Segmentation](./SemanticSegmentation/)
 
 ## Lane Detection
@@ -31,6 +32,12 @@ Computer Vision and Deep Learning related projects of Udacity's Self-driving Car
 
 <p align="center">
   <img src="./BehavioralCloning/behavioral_cloning.gif">
+</p>
+
+## Object Detection with SSD
+
+<p align="center">
+  <img src="./ObjectDetection/ssd.gif">
 </p>
 
 ## Semantic Segmentation
