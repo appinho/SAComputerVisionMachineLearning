@@ -1,6 +1,8 @@
 # Term 3 Additional Project: Object Detection Lab
 
-![](ssd.gif)
+<p align="center">
+  <img src="./ssd.gif">
+</p>
 
 ### Mobile Nets
 
@@ -25,5 +27,6 @@ less than 0.5 on all ground truth boxes it's removed.
 2. *Hard negative mining*. This is a fancy way of saying "search for negatives examples
 the highest confidence". For example, a box that misclassifies a dog as a cat with 80% confidence.
 The authors of the SSD paper limit the positive to hard negative ratio to 3:1 at most. The actual positive to negative ratio is typically much higher and the number of boxes are typically reduced substantially.  
-[SSD Code](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/detection_model_zoo.md)
+
+[SSD Code](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/detection_model_zoo.md)  
 [SSD Paper](https://arxiv.org/abs/1611.10012)
