@@ -60,34 +60,41 @@ def layers(vgg_layer3_out, vgg_layer4_out, vgg_layer7_out, num_classes):
     :return: The Tensor for the last layer of output
     """
     
-    # Define architecture
-    w_min = 1e-3
+    # Define kernel parameters
+    kernel_w = 1e-3
+    kernel_std = 0.01
 
     # 1x1 convolutions
     c_1x1_l3 = tf.layers.conv2d(vgg_layer3_out, num_classes, 1, padding='same',
-        kernel_regularizer = tf.contrib.layers.l2_regularizer(w_min))
+        kernel_initializer= tf.random_normal_initializer(stddev=kernel_std),
+        kernel_regularizer = tf.contrib.layers.l2_regularizer(kernel_w))
     c_1x1_l4 = tf.layers.conv2d(vgg_layer4_out, num_classes, 1, padding='same',
-        kernel_regularizer = tf.contrib.layers.l2_regularizer(w_min))
+        kernel_initializer= tf.random_normal_initializer(stddev=kernel_std),
+        kernel_regularizer = tf.contrib.layers.l2_regularizer(kernel_w))
     c_1x1_l7 = tf.layers.conv2d(vgg_layer7_out, num_classes, 1, padding='same',
-        kernel_regularizer = tf.contrib.layers.l2_regularizer(w_min))
+        kernel_initializer= tf.random_normal_initializer(stddev=kernel_std),
+        kernel_regularizer = tf.contrib.layers.l2_regularizer(kernel_w))
 
     # Upsampling
     up_l7 = tf.layers.conv2d_transpose(c_1x1_l7, num_classes, 4, strides=(2, 2), padding='same',
-        kernel_regularizer = tf.contrib.layers.l2_regularizer(w_min))
+        kernel_initializer= tf.random_normal_initializer(stddev=kernel_std),
+        kernel_regularizer = tf.contrib.layers.l2_regularizer(kernel_w))
 
     # 1st Skip connection
     skip_1 = tf.add(c_1x1_l4, up_l7)
 
     # Upsamling
     up_s1 = tf.layers.conv2d_transpose(skip_1, num_classes, 4, strides=(2, 2), padding='same',
-        kernel_regularizer = tf.contrib.layers.l2_regularizer(w_min))
+        kernel_initializer= tf.random_normal_initializer(stddev=kernel_std),
+        kernel_regularizer = tf.contrib.layers.l2_regularizer(kernel_w))
 
     # 2nd Skip connection
-    skip_2 = tf.add(up_s1, c_1x1_l3)
+    skip_2 = tf.add(c_1x1_l3, up_s1)
 
     # Upsamling
     final_layer = tf.layers.conv2d_transpose(skip_2, num_classes, 16, strides=(8, 8), padding='same',
-        kernel_regularizer = tf.contrib.layers.l2_regularizer(w_min))
+        kernel_initializer= tf.random_normal_initializer(stddev=kernel_std),
+        kernel_regularizer = tf.contrib.layers.l2_regularizer(kernel_w))
 
     # Return
     return final_layer
@@ -151,15 +158,17 @@ def train_nn(sess, epochs, batch_size, get_batches_fn, train_op, cross_entropy_l
 
         print("Epoch: ", epoch)
 
+        i = 0
         # Loop over batch size
         for image, label in get_batches_fn(batch_size):
-
+                
             # Train
             _, loss = sess.run([train_op, cross_entropy_loss], 
                 feed_dict={input_image: image, correct_label: label,
                     keep_prob: p_keep, learning_rate: l_rate})
 
-            print("Loss: ",loss)
+            i += 1
+            print("Loss ", i, " : ", loss)
 
     print("Training finished")
 
@@ -181,9 +190,8 @@ def run():
     #  https://www.cityscapes-dataset.com/
 
     # Hyperparameters
-    num_epochs = 1
+    num_epochs = 10
     batch_size = 5
-    #learning_rate = 0.0001
 
     with tf.Session() as sess:
 
@@ -208,12 +216,12 @@ def run():
         logits, train_op, cross_entropy_loss = optimize(final_layer, correct_label, 
             learning_rate, num_classes)
         
-        # TODO: Train NN using the train_nn function
+        # Train NN using the train_nn function
         train_nn(sess, num_epochs, batch_size, get_batches_fn, train_op, cross_entropy_loss,
             input_image, correct_label, keep_prob, learning_rate)
 
-        # TODO: Save inference data using helper.save_inference_samples
-        #helper.save_inference_samples(runs_dir, data_dir, sess, image_shape, logits, keep_prob, input_image)
+        # Save inference data using helper.save_inference_samples
+        helper.save_inference_samples(runs_dir, data_dir, sess, image_shape, logits, keep_prob, input_image)
 
         # OPTIONAL: Apply the trained model to a video
 
