@@ -1,4 +1,9 @@
-# Semantic Segmentation
+# Term 3 Project 2: Road Semantic Segmentation
+
+<p align="center">
+  <img src="./SemanticSegmentation/imgs/test_image.png">
+</p>
+
 ### Introduction
 In this project, you'll label the pixels of a road in images using a Fully Convolutional Network (FCN).
 
