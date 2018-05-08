@@ -42,4 +42,6 @@ Computer Vision and Deep Learning related projects of Udacity's Self-driving Car
 
 ## Semantic Segmentation
 
-Coming soon..  
+<p align="center">
+  <img src="./SemanticSegmentation/imgs/test_image.png">
+</p>
