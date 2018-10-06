@@ -1,7 +1,7 @@
 ﻿# SDC - Computer Vision and Deep Learning Projects
 [![Udacity - Self-Driving Car NanoDegree](https://s3.amazonaws.com/udacity-sdc/github/shield-carnd.svg)](http://www.udacity.com/drive)
 
-Computer Vision and Deep Learning related projects of Udacity's Self-driving Car Nanodegree Program:  
+Computer Vision and Deep Learning related projects of Udacity's Self-driving Car Nanodegree Program  
 * [Lane Detection](./LaneDetection/)
 * [Camera-based Vehicle Tracking](./CameraBasedVehicleTracking/)
 * [Traffic Sign Classification](./TrafficSignClassification/)
@@ -9,38 +9,38 @@ Computer Vision and Deep Learning related projects of Udacity's Self-driving Car
 * [Object Detection with SSD](./ObjectDetection/)
 * [Semantic Segmentation](./SemanticSegmentation/)
 
-## Lane Detection
+### Lane Detection
 
 <p align="center">
   <img src="./LaneDetection/lane_detection.gif">
 </p>
 
-## Camera-based Vehicle Tracking
+### Camera-based Vehicle Tracking
 
 <p align="center">
   <img src="./CameraBasedVehicleTracking/vehicle_tracking.gif">
 </p>
 
-## Traffic Sign Classification
+### Traffic Sign Classification
 
 
 <p align="center">
   <img src="./TrafficSignClassification/traffic_sign_classification.png">
 </p>
 
-## Behavioral Cloning
+### Behavioral Cloning
 
 <p align="center">
   <img src="./BehavioralCloning/behavioral_cloning.gif">
 </p>
 
-## Object Detection with SSD
+### Object Detection with SSD
 
 <p align="center">
   <img src="./ObjectDetection/ssd.gif">
 </p>
 
-## Semantic Segmentation
+### Semantic Segmentation
 
 <p align="center">
   <img src="./SemanticSegmentation/imgs/test_image.png">
