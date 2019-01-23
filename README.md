@@ -45,3 +45,7 @@ Computer Vision and Machine Learning related projects of Udacity's Self-driving 
 <p align="center">
   <img src="./SemanticSegmentation/imgs/test_image.png">
 </p>
+
+## License
+
+With the standards of the [MIT License](LICENSE.md) you are more than welcomed to contribute to this repository!
